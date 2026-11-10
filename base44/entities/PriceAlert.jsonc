@@ -1,0 +1,77 @@
+{
+  "name": "PriceAlert",
+  "type": "object",
+  "properties": {
+    "threshold": {
+      "type": "number",
+      "description": "Seuil de valeur estim\u00e9e en euros"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email de notification"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Alerte active ou non"
+    },
+    "last_triggered": {
+      "type": "string",
+      "description": "Date du dernier d\u00e9clenchement"
+    }
+  },
+  "required": [
+    "threshold",
+    "email"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

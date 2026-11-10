@@ -1,0 +1,100 @@
+{
+  "name": "Collection",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nom de la collection"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description de la collection"
+    },
+    "theme": {
+      "type": "string",
+      "enum": [
+        "periode",
+        "pays",
+        "metal",
+        "denomination",
+        "libre"
+      ],
+      "description": "Th\u00e8me de la collection"
+    },
+    "color": {
+      "type": "string",
+      "description": "Couleur d'accent (hex)"
+    },
+    "coin_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs des pi\u00e8ces incluses"
+    },
+    "banknote_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs des billets inclus"
+    },
+    "cover_image_url": {
+      "type": "string",
+      "description": "Image de couverture"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

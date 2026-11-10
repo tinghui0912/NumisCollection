@@ -1,0 +1,132 @@
+{
+  "name": "Banknote",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nom du billet"
+    },
+    "country": {
+      "type": "string",
+      "description": "Pays d'origine"
+    },
+    "year": {
+      "type": "number",
+      "description": "Ann\u00e9e d'\u00e9mission"
+    },
+    "denomination": {
+      "type": "string",
+      "description": "Valeur faciale (ex: 100 Francs, 50 Euros)"
+    },
+    "serial_number": {
+      "type": "string",
+      "description": "Num\u00e9ro de s\u00e9rie"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "NEUF",
+        "SPL",
+        "TTB",
+        "TB",
+        "B",
+        "AB"
+      ],
+      "description": "\u00c9tat de conservation (Neuf \u00e0 Assez bien)"
+    },
+    "rarity": {
+      "type": "string",
+      "enum": [
+        "commune",
+        "peu_commune",
+        "rare",
+        "tres_rare",
+        "exceptionnelle"
+      ],
+      "description": "Raret\u00e9 du billet"
+    },
+    "purchase_price": {
+      "type": "number",
+      "description": "Prix d'achat en euros"
+    },
+    "estimated_value": {
+      "type": "number",
+      "description": "Valeur estim\u00e9e en euros"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Photo du billet"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes suppl\u00e9mentaires"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "anciens_francs",
+        "nouveaux_francs",
+        "euros",
+        "devises_etrangeres",
+        "historique"
+      ],
+      "description": "Cat\u00e9gorie du billet"
+    }
+  },
+  "required": [
+    "name",
+    "country",
+    "year",
+    "denomination"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

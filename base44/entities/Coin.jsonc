@@ -1,0 +1,146 @@
+{
+  "name": "Coin",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nom de la pi\u00e8ce"
+    },
+    "country": {
+      "type": "string",
+      "description": "Pays d'origine"
+    },
+    "year": {
+      "type": "number",
+      "description": "Ann\u00e9e de frappe"
+    },
+    "denomination": {
+      "type": "string",
+      "description": "Valeur faciale (ex: 5 Francs, 1 Euro)"
+    },
+    "metal": {
+      "type": "string",
+      "enum": [
+        "or",
+        "argent",
+        "bronze",
+        "cuivre",
+        "nickel",
+        "aluminium",
+        "bimetalique",
+        "autre"
+      ],
+      "description": "M\u00e9tal de la pi\u00e8ce"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "FDC",
+        "SUP",
+        "TTB",
+        "TB",
+        "B",
+        "AB"
+      ],
+      "description": "\u00c9tat de conservation (Fleur de coin \u00e0 Assez bien)"
+    },
+    "rarity": {
+      "type": "string",
+      "enum": [
+        "commune",
+        "peu_commune",
+        "rare",
+        "tres_rare",
+        "exceptionnelle"
+      ],
+      "description": "Raret\u00e9 de la pi\u00e8ce"
+    },
+    "mintage": {
+      "type": "number",
+      "description": "Nombre de pi\u00e8ces \u00e9dit\u00e9es (tirage)"
+    },
+    "purchase_price": {
+      "type": "number",
+      "description": "Prix d'achat en euros"
+    },
+    "estimated_value": {
+      "type": "number",
+      "description": "Valeur estim\u00e9e en euros"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Photo de la pi\u00e8ce"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes suppl\u00e9mentaires"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "antique",
+        "medievale",
+        "moderne",
+        "contemporaine",
+        "commemorative"
+      ],
+      "description": "Cat\u00e9gorie de la pi\u00e8ce"
+    }
+  },
+  "required": [
+    "name",
+    "country",
+    "year",
+    "denomination"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
